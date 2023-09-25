@@ -8,12 +8,7 @@ typedef struct SenhaAtendimento {
 } SenhaAtendimento;
 
 void inserir(SenhaAtendimento **comeco, SenhaAtendimento **fim, int cont) {
-    SenhaAtendimento *novo = (SenhaAtendimento *)malloc(sizeof(SenhaAtendimento));
-
-    if (novo == NULL) {
-        printf("Erro de alocação do nó.\n");
-        return;
-    }
+    SenhaAtendimento *novo = (SenhaAtendimento*)malloc(sizeof(SenhaAtendimento));
 
     novo->senha = cont;
     novo->proximo = NULL;
@@ -65,6 +60,15 @@ int main() {
 
     remover(&comeco);
     remover(&comeco);
+    imprimir(&comeco);
+    remover(&comeco);
+    remover(&comeco);
+    imprimir(&comeco);
+
+    inserir(&comeco, &fim, 5);
+    inserir(&comeco, &fim, 6);
+    inserir(&comeco, &fim, 7);
+    inserir(&comeco, &fim, 8);
     imprimir(&comeco);
 
     return 0;
