@@ -71,5 +71,11 @@ int main() {
     inserir(&comeco, &fim, 8);
     imprimir(&comeco);
 
+    inserir(&comeco, &fim, 40);
+    remover(&comeco);
+    imprimir(&comeco);
+    inserir(&comeco, &fim, 20);
+    imprimir(&comeco);
+
     return 0;
 }
