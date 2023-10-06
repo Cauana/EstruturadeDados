@@ -8,66 +8,67 @@ typedef struct Celula {
     struct Celula *proximo;
 } celula;
 
-celula *top = NULL;
 
-void push(int cont){
+void push(int cont, celula *p){
     
     struct Celula* novo = (struct Celula*)malloc(sizeof(struct Celula));
     
     novo -> conteudo = cont;
-    novo -> proximo = top;
-    top = novo;
+    novo -> proximo = p -> proximo;
+    p -> proximo = novo;
     
 }
 
 
-void pop() {
+int pop( celula *p) {
+    
+    int x;
+    celula *aux;
+    aux = p -> proximo;
+    x = aux -> conteudo;
+    p -> proximo = aux -> proximo;
+    free (aux);
 
-    if (top == NULL) {
-        printf("\nLista vazia!\n");
-        
-    } else {
-        celula *aux;
-        aux = top;
-        top = top -> proximo;
-        free(aux);
-    }
-
+    return x;
 
 }
 
-void imprimir(){
+void imprimir(celula *p){
     celula *aux;
-    aux = top;
+    aux = p -> proximo;
     int contador = 0;
     while(aux!=NULL){
         printf("%d->", aux -> conteudo);
         contador++;
+        
         aux = aux-> proximo;
+
     }
     
 }
 
 int main (){
-    push(1);
-    push(2);
-    push(3);
-    imprimir();
+    
+    celula top;
+    celula *p;
+    p = &top;
+    p -> proximo = NULL;
+    
+    
+    push(1, p);
+    push(2, p);
+    push(3, p);
+    imprimir(p);
     printf("\n");
-    pop();
-    pop();
-    imprimir();
+    pop(p);
+    pop(p);
+    imprimir(p);
     printf("\n");
-    push(5);
-    push(8);
-    imprimir();
+    push(5, p);
+    push(8, p);
+    imprimir(p);
     
 }
-
-
-
-
-
 
 
 
