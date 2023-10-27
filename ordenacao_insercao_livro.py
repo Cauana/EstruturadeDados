@@ -12,7 +12,7 @@ def ordenacao_insercao_livros(lista_livros):
 
 if __name__ == "__main__":
 
-    nomes = ["A Bela e a Fera", "Hidadesy Potter", "Dom Quixote", "1984", "A Máquina do Tempo"]
+    nomes = ["A Bela e a Fera", "Harry Potter", "Dom Quixote", "1984", "A Máquina do Tempo"]
 
     ordenacao_insercao_livros(nomes)
 
