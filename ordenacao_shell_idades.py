@@ -1,21 +1,21 @@
 
 
-def ordenacao_shell(idades):
-    divisao = len(idades) // 2
+def ordenacao_shell(alturas):
+    divisao = len(alturas) // 2
     while divisao > 0:
-        for i in range(divisao, len(idades)):
-            temp = idades[i]
+        for i in range(divisao, len(alturas)):
+            temp = alturas[i]
             j = i
-            while j >= divisao and idades[j - divisao] > temp:
-                idades[j] = idades[j - divisao]
+            while j >= divisao and alturas[j - divisao] > temp:
+                alturas[j] = alturas[j - divisao]
                 j -= divisao
-            idades[j] = temp
+            alturas[j] = temp
         divisao //= 2
 
 
 if __name__ == "__main__":
 
-    idades = [60,30,20,10,40,70,50,80]
-    ordenacao_shell(idades)
-    print(idades)
+    alturas = [1.50,1.45,2.0,1.65,1.70,1.80,1.43]
+    ordenacao_shell(alturas)
+    print(alturas)
 
