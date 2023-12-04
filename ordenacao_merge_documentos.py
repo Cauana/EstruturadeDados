@@ -1,39 +1,48 @@
-def merge_sort_documentos(lista_documentos):
-    if len(lista_documentos) > 1:
-        meio = len(lista_documentos) // 2  
-        metade_esquerda = lista_documentos[:meio] 
-        metade_direita = lista_documentos[meio:]
+def merge_sort(inicio, fim, documentos):
+    if inicio < fim - 1:
+        meio = (inicio + fim) // 2
+        merge_sort(inicio, meio, documentos)
+        merge_sort(meio, fim, documentos)
+        intercala(inicio, meio, fim, documentos)
 
-        merge_sort_documentos(metade_esquerda) 
-        merge_sort_documentos(metade_direita) 
+def intercala(inicio, meio, fim, documentos):
+    vet_temp = [0] * (fim - inicio)
+    ind_esq = inicio
+    ind_dir = meio
+    ind_temp = 0
+
+    while ind_esq < meio and ind_dir < fim:
+        if documentos[ind_esq] <= documentos[ind_dir]:
+            vet_temp[ind_temp] = documentos[ind_esq]
+            ind_esq += 1
+        else:
+            vet_temp[ind_temp] = documentos[ind_dir]
+            ind_dir += 1
+        ind_temp += 1
+
+    while ind_esq < meio:
+        vet_temp[ind_temp] = documentos[ind_esq]
+        ind_esq += 1
+        ind_temp += 1
+
+    while ind_dir < fim:
+        vet_temp[ind_temp] = documentos[ind_dir]
+        ind_dir += 1
+        ind_temp += 1
+
+    for i in range(len(vet_temp)):
+        documentos[inicio + i] = vet_temp[i]
 
 
-        i = j = k = 0
 
-        while i < len(metade_esquerda) and j < len(metade_direita):
-            if metade_esquerda[i] < metade_direita[j]:
-                lista_documentos[k] = metade_esquerda[i]
-                i += 1
-            else:
-                lista_documentos[k] = metade_direita[j]
-                j += 1
-            k += 1
 
-        while i < len(metade_esquerda):
-            lista_documentos[k] = metade_esquerda[i]
-            i += 1
-            k += 1
-
-        while j < len(metade_direita):
-            lista_documentos[k] = metade_direita[j]
-            j += 1
-            k += 1
 
 
 if __name__ == "__main__":
 
-    documentos = ["RG", "CPF", "Cert. de Nascimento", "Ct. de Trabalho", "Título", "CNH", "Passaporte"]
-    merge_sort_documentos(documentos)
+    documentos = ["RG", "CPF", "CERTIDÃO", "TÍTULO", "CNH", "PASSAPORTE"]
+    merge_sort(0, len(documentos), documentos)
     print(documentos)
+
 
 
