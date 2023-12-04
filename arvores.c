@@ -2,38 +2,38 @@
 #include <stdlib.h>
 
 struct No {
-    int valor;
+    int matricula;
     struct No* esquerda;
     struct No* direita;
 };
 
-struct No* criarNo(int valor) {
+struct No* criarNo(int matricula) {
     struct No* novoNo = (struct No*)malloc(sizeof(struct No));
-    novoNo->valor = valor;
+    novoNo->matricula = matricula;
     novoNo->esquerda = novoNo->direita = NULL;
     return novoNo;
 }
 
-struct No* inserir(struct No* raiz, int valor) {
+struct No* inserir(struct No* raiz, int matricula) {
     if (raiz == NULL) {
-        return criarNo(valor);
+        return criarNo(matricula);
     }
-    if (valor < raiz->valor) {
-        raiz->esquerda = inserir(raiz->esquerda, valor);
-    } else if (valor > raiz->valor) {
-        raiz->direita = inserir(raiz->direita, valor);
+    if (matricula < raiz->matricula) {
+        raiz->esquerda = inserir(raiz->esquerda, matricula);
+    } else if (matricula > raiz->matricula) {
+        raiz->direita = inserir(raiz->direita, matricula);
     }
     return raiz;
 }
 
-struct No* buscar(struct No* raiz, int valor) {
-    if (raiz == NULL || raiz->valor == valor) {
+struct No* buscar(struct No* raiz, int matricula) {
+    if (raiz == NULL || raiz->matricula == matricula) {
         return raiz;
     }
-    if (valor < raiz->valor) {
-        return buscar(raiz->esquerda, valor);
+    if (matricula < raiz->matricula) {
+        return buscar(raiz->esquerda, matricula);
     }
-    return buscar(raiz->direita, valor);
+    return buscar(raiz->direita, matricula);
 }
 
 struct No* encontrarMenorNo(struct No* no) {
@@ -44,39 +44,39 @@ struct No* encontrarMenorNo(struct No* no) {
     return atual;
 }
 
-struct No* remover(struct No* raiz, int valor) {
+struct No* remover(struct No* raiz, int matricula) {
     if (raiz == NULL) {
         return raiz;
     }
 
-    if (valor < raiz->valor) {
-        raiz->esquerda = remover(raiz->esquerda, valor);
-    } else if (valor > raiz->valor) {
-        raiz->direita = remover(raiz->direita, valor);
-    } else {
-        // Nó com um filho ou nenhum filho
-        if (raiz->esquerda == NULL) {
-            struct No* temp = raiz->direita;
-            free(raiz);
-            return temp;
-        } else if (raiz->direita == NULL) {
-            struct No* temp = raiz->esquerda;
-            free(raiz);
-            return temp;
-        }
-        struct No* temp = encontrarMenorNo(raiz->direita);
+    struct No* noRemover = buscar(raiz, matricula);
 
-        raiz->valor = temp->valor;
-
-        raiz->direita = remover(raiz->direita, temp->valor);
+    if (noRemover == NULL) {
+        return raiz;
     }
+
+    if (noRemover->esquerda == NULL) {
+        struct No* temp = noRemover->direita;
+        free(noRemover);
+        return temp;
+    } else if (noRemover->direita == NULL) {
+        struct No* temp = noRemover->esquerda;
+        free(noRemover);
+        return temp;
+    }
+
+    struct No* temp = encontrarMenorNo(noRemover->direita);
+    noRemover->matricula = temp->matricula;
+    noRemover->direita = remover(noRemover->direita, temp->matricula);
+
     return raiz;
 }
+
 
 void imprimirEmOrdem(struct No* raiz) {
     if (raiz != NULL) {
         imprimirEmOrdem(raiz->esquerda);
-        printf("%d ", raiz->valor);
+        printf("%d ", raiz->matricula);
         imprimirEmOrdem(raiz->direita);
     }
 }
@@ -84,29 +84,29 @@ void imprimirEmOrdem(struct No* raiz) {
 int main() {
     struct No* raiz = NULL;
 
-    raiz = inserir(raiz, 5);
-    inserir(raiz, 3);
-    inserir(raiz, 8);
-    inserir(raiz, 1);
-    inserir(raiz, 4);
+    raiz = inserir(raiz, 5582);
+    inserir(raiz, 3125);
+    inserir(raiz, 8952);
+    inserir(raiz, 1123);
+    inserir(raiz, 4502);
 
-    printf("Arvore em ordem: ");
+    printf("Matriculas em ordem: ");
     imprimirEmOrdem(raiz);
     printf("\n");
 
-    int valorBusca = 4;
-    struct No* resultadoBusca = buscar(raiz, valorBusca);
+    int matriculaBusca = 3125;
+    struct No* resultadoBusca = buscar(raiz, matriculaBusca);
 
     if (resultadoBusca != NULL) {
-        printf("Elemento %d encontrado na arvore.\n", valorBusca);
+        printf("Matricula %d encontrado na arvore.\n", matriculaBusca);
     } else {
-        printf("Elemento %d nao encontrado na arvore.\n", valorBusca);
+        printf("Matricula %d nao encontrado na arvore.\n", matriculaBusca);
     }
 
-    int valorRemover = 3;
-    raiz = remover(raiz, valorRemover);
+    int matriculaRemover = 3125;
+    raiz = remover(raiz, matriculaRemover);
 
-    printf("Arvore apos a remocao do elemento %d em ordem: ", valorRemover);
+    printf("Arvore apos a remocao da matricula %d em ordem: ", matriculaRemover);
     imprimirEmOrdem(raiz);
     printf("\n");
 
