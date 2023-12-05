@@ -44,30 +44,22 @@ struct No* encontrarMenorNo(struct No* no) {
     return atual;
 }
 
-struct No* remover(struct No* raiz, int matricula) {
+struct No* remover(struct No* raiz) {
     if (raiz == NULL) {
         return raiz;
     }
-
-    struct No* noRemover = buscar(raiz, matricula);
-
-    if (noRemover == NULL) {
-        return raiz;
-    }
-
-    if (noRemover->esquerda == NULL) {
-        struct No* temp = noRemover->direita;
-        free(noRemover);
+    if (raiz->esquerda == NULL) {
+        struct No* temp = raiz->direita;
+        free(raiz);
         return temp;
-    } else if (noRemover->direita == NULL) {
-        struct No* temp = noRemover->esquerda;
-        free(noRemover);
+    } else if (raiz->direita == NULL) {
+        struct No* temp = raiz->esquerda;
+        free(raiz);
         return temp;
     }
-
-    struct No* temp = encontrarMenorNo(noRemover->direita);
-    noRemover->matricula = temp->matricula;
-    noRemover->direita = remover(noRemover->direita, temp->matricula);
+    struct No* temp = encontrarMenorNo(raiz->direita);
+    raiz->matricula = temp->matricula;
+    raiz->direita = remover(raiz->direita);
 
     return raiz;
 }
@@ -104,7 +96,7 @@ int main() {
     }
 
     int matriculaRemover = 3125;
-    raiz = remover(raiz, matriculaRemover);
+    remover(buscar(raiz, matriculaRemover));
 
     printf("Arvore apos a remocao da matricula %d em ordem: ", matriculaRemover);
     imprimirEmOrdem(raiz);
