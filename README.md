@@ -3,7 +3,7 @@
 
 # Estrutura de Dados <br id=b>
 
-Este repositório contém implementações de diversas estruturas de dados em diferentes linguagens de programação. As estruturas de dados desempenham um papel fundamental no desenvolvimento de software eficiente e escalável, ajudando na organização e manipulação eficaz de dados.
+Este repositório contém implementações de diversas estruturas de dados em C e Python. As estruturas de dados desempenham um papel fundamental no desenvolvimento de software eficiente e escalável, ajudando na organização e manipulação eficaz de dados.
 
 ## Estruturas Implementadas
 
@@ -37,7 +37,7 @@ Este repositório contém implementações de diversas estruturas de dados em di
 
 # Data Structures <br id=a>
 
-This repository contains implementations of various data structures in different programming languages. Data structures play a fundamental role in the development of efficient and scalable software, aiding in the effective organization and manipulation of data.
+This repository contains implementations of various data structures using C and Python. Data structures play a fundamental role in the development of efficient and scalable software, aiding in the effective organization and manipulation of data.
 
 ## Implemented Data Structures
 
