@@ -37,7 +37,7 @@ Este repositório contém implementações de diversas estruturas de dados em C 
 
 # Data Structures <br id=a>
 
-This repository contains implementations of various data structures using C and Python. Data structures play a fundamental role in the development of efficient and scalable software, aiding in the effective organization and manipulation of data.
+This repository contains implementations of various data structures using C and Python. Data structures play a fundamental role in the development of efficient and scalable software, aiding in the effective organization and data manipulation.
 
 ## Implemented Data Structures
 
